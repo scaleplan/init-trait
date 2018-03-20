@@ -1,0 +1,17 @@
+{
+    "name": "avtomon/InitTrait",
+    "description": "Trait for initialization static and object properties via settings array",
+    "type": "project",
+    "minimum-stability": "dev",
+    "config": {
+        "process-timeout": 1800
+    },
+    "autoload": {
+        "psr-4": {
+            "avtomon\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0"
+    }
+}
