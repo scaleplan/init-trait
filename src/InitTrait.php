@@ -4,15 +4,16 @@ namespace avtomon;
 
 trait InitTrait
 {
-    protected static $settings = [];
-
     /**
      * Установка значений статических свойств
      *
      * @param array $settings - массив свойства в формате 'имя' => 'значение'
+     *
+     * @return array
      */
-    public static function initStatic(array $settings)
+    public static function initStatic(array $settings): array
     {
+        $settings += static::$settings ?? [];
         foreach ($settings as $name => &$value) {
             if (property_exists(self::class, $name)) {
                 $methodName = 'set' . ucfirst($name);
@@ -22,18 +23,25 @@ trait InitTrait
                     self::$$name = $value;
                 }
 
-                unset($value);
+                unset($settings[$name]);
             }
         }
+
+        unset($value);
+
+        return $settings;
     }
 
     /**
      * Установка значений свойств в контексте объекта
      *
      * @param array $settings - массив свойства в формате 'имя' => 'значение'
+     *
+     * @return array
      */
-    protected function initObject(array $settings)
+    protected function initObject(array $settings): array
     {
+        $settings += static::$settings ?? [];
         foreach ($settings as $name => &$value) {
             if (property_exists($this, $name)) {
                 $methodName = 'set' . ucfirst($name);
@@ -43,13 +51,22 @@ trait InitTrait
                     $this->$name = $value;
                 }
 
-                unset($value);
+                unset($settings[$name]);
             }
         }
+
+        unset($value);
+
+        return $settings;
     }
 
+    /**
+     * Установить настройки класса по умолчанию
+     *
+     * @param array $settings - массив настроек
+     */
     public static function setSettings(array $settings): void
     {
-        self::$settings = $settings;
+        static::$settings = $settings;
     }
 }
