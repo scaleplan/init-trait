@@ -15,10 +15,10 @@ trait InitTrait
     {
         $settings += static::$settings ?? [];
         foreach ($settings as $name => &$value) {
-            if (property_exists(self::class, $name)) {
+            if (property_exists(static::class, $name)) {
                 $methodName = 'set' . ucfirst($name);
-                if (method_exists(self::class, $methodName)) {
-                    self::$$methodName($value);
+                if (method_exists(static::class, $methodName) && (new \ReflectionMethod(static::class, $methodName))->isStatic()) {
+                    self::$methodName($value);
                 } else {
                     self::$$name = $value;
                 }
@@ -45,7 +45,7 @@ trait InitTrait
         foreach ($settings as $name => &$value) {
             if (property_exists($this, $name)) {
                 $methodName = 'set' . ucfirst($name);
-                if (method_exists($this, $methodName)) {
+                if (method_exists($this, $methodName) && !(new \ReflectionMethod(static::class, $methodName))->isStatic()) {
                     $this->$methodName($value);
                 } else {
                     $this->$name = $value;
