@@ -2,6 +2,12 @@
 
 namespace avtomon;
 
+/**
+ * Трейт иницилизации объектов и классов
+ *
+ * Trait InitTrait
+ * @package avtomon
+ */
 trait InitTrait
 {
     /**
@@ -10,6 +16,8 @@ trait InitTrait
      * @param array $settings - массив свойства в формате 'имя' => 'значение'
      *
      * @return array
+     *
+     * @throws \ReflectionException
      */
     public static function initStatic(array $settings): array
     {
@@ -38,6 +46,8 @@ trait InitTrait
      * @param array $settings - массив свойства в формате 'имя' => 'значение'
      *
      * @return array
+     *
+     * @throws \ReflectionException
      */
     protected function initObject(array $settings): array
     {
