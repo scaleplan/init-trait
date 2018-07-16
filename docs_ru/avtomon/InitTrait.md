@@ -32,7 +32,7 @@ Trait InitTrait
 
 - **public static** method.
 - Может принимать следующий параметр(ы):
-    - `$settings` (`array`) &mdash; - массив свойства в формате &#039;имя&#039; =&gt; &#039;значение&#039;
+    - `$settings` (`array`) - массив свойства в формате &#039;имя&#039; =&gt; &#039;значение&#039;
 - Возвращает `array` value.
 - Выбрасывает одно из следующих исключений:
     - [`ReflectionException`](http://php.net/class.ReflectionException)
@@ -45,7 +45,7 @@ Trait InitTrait
 
 - **protected** method.
 - Может принимать следующий параметр(ы):
-    - `$settings` (`array`) &mdash; - массив свойства в формате &#039;имя&#039; =&gt; &#039;значение&#039;
+    - `$settings` (`array`) - массив свойства в формате &#039;имя&#039; =&gt; &#039;значение&#039;
 - Возвращает `array` value.
 - Выбрасывает одно из следующих исключений:
     - [`ReflectionException`](http://php.net/class.ReflectionException)
@@ -58,6 +58,6 @@ Trait InitTrait
 
 - **public static** method.
 - Может принимать следующий параметр(ы):
-    - `$settings` (`array`) &mdash; - массив настроек
+    - `$settings` (`array`) - массив настроек
 - Ничего не возвращает.
 
