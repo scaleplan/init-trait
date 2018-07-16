@@ -1,7 +1,7 @@
 # initTrait
 
-Trait initialization of objects and classes.
+The initialization of objects and classes.
 
-It simplifies the mass assignment of the values of the passed array of settings to the properties of the class/object of the same name. If there is a setter for the property, it uses it to assign a value.
+Simplifies the mass assignment of the values ​​of the transferred array of settings to the same properties of the class/object. If this is for a property that has a setter, then it uses it to assign a value.
 
-[Trait documentation](docs_en)
+[Trace documentation](docs_en)
