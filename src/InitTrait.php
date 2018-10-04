@@ -1,12 +1,13 @@
 <?php
 
-namespace avtomon;
+namespace Scaleplan\InitTrait;
 
 /**
  * Трейт иницилизации объектов и классов
  *
  * Trait InitTrait
- * @package avtomon
+ *
+ * @package Scaleplan\InitTrait
  */
 trait InitTrait
 {
@@ -21,7 +22,7 @@ trait InitTrait
      */
     public static function initStatic(array $settings): array
     {
-        $settings += static::$settings ?? [];
+        $settings += (array) static::$settings ?? [];
         foreach ($settings as $name => &$value) {
             if (property_exists(static::class, $name)) {
                 $methodName = 'set' . ucfirst($name);
@@ -51,7 +52,7 @@ trait InitTrait
      */
     protected function initObject(array $settings): array
     {
-        $settings += static::$settings ?? [];
+        $settings += (array) static::$settings ?? [];
         foreach ($settings as $name => &$value) {
             if (property_exists($this, $name)) {
                 $methodName = 'set' . ucfirst($name);
