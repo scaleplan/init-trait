@@ -5,7 +5,7 @@ The initialization of objects and classes.
 #### Installation
 
 ``
-composer reqire avtomon/inittrait
+composer reqire scaleplan/inittrait
 ``
 <br>
 

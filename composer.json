@@ -3,7 +3,7 @@
     "description": "Trait for initialization static and object properties via settings array",
     "autoload": {
         "psr-4": {
-            "avtomon\\": "src/"
+            "Scaleplan\\InitTrait\\": "src/"
         }
     },
     "require": {

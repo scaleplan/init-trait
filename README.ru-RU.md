@@ -5,7 +5,7 @@
 #### Установка
 
 ``
-composer reqire avtomon/inittrait
+composer reqire scaleplan/inittrait
 ``
 <br>
 
