@@ -2,6 +2,8 @@
 
 namespace Scaleplan\InitTrait;
 
+use Scaleplan\Helpers\NameConverter;
+
 /**
  * Трейт иницилизации объектов и классов
  *
@@ -17,22 +19,31 @@ trait InitTrait
      * @param array $settings - массив свойства в формате 'имя' => 'значение'
      *
      * @return array
-     *
-     * @throws \ReflectionException
      */
     public static function initStatic(array $settings): array
     {
         $settings += (array) static::$settings ?? [];
         foreach ($settings as $name => &$value) {
+            $propertyName = null;
             if (property_exists(static::class, $name)) {
-                $methodName = 'set' . ucfirst($name);
-                if (method_exists(static::class, $methodName) && (new \ReflectionMethod(static::class, $methodName))->isStatic()) {
-                    self::$methodName($value);
-                } else {
-                    self::$$name = $value;
-                }
-
+                $propertyName = $name;
                 unset($settings[$name]);
+            }
+
+            if ($propertyName !== null
+                && property_exists(static::class, NameConverter::snakeCaseToCamelCase($name))) {
+                $propertyName = NameConverter::snakeCaseToCamelCase($name);
+                unset($settings[$name]);
+            }
+
+            $methodName = 'set' . $propertyName;
+            if (is_callable([static::class, $methodName])) {
+                static::{$methodName}($value);
+                continue;
+            }
+
+            if (array_key_exists($propertyName, get_class_vars(static::class))) {
+                static::${$propertyName} = $value;
             }
         }
 
@@ -47,22 +58,31 @@ trait InitTrait
      * @param array $settings - массив свойства в формате 'имя' => 'значение'
      *
      * @return array
-     *
-     * @throws \ReflectionException
      */
     protected function initObject(array $settings): array
     {
         $settings += (array) static::$settings ?? [];
         foreach ($settings as $name => &$value) {
+            $propertyName = null;
             if (property_exists($this, $name)) {
-                $methodName = 'set' . ucfirst($name);
-                if (method_exists($this, $methodName) && !(new \ReflectionMethod(static::class, $methodName))->isStatic()) {
-                    $this->$methodName($value);
-                } else {
-                    $this->$name = $value;
-                }
-
+                $propertyName = $name;
                 unset($settings[$name]);
+            }
+
+            if ($propertyName !== null
+                && property_exists($this, NameConverter::snakeCaseToLowerCamelCase($name))) {
+                $propertyName = NameConverter::snakeCaseToLowerCamelCase($name);
+                unset($settings[$name]);
+            }
+
+            $methodName = 'set' . ucfirst($propertyName);
+            if (is_callable([$this, $methodName])) {
+                $this->{$methodName}($value);
+                continue;
+            }
+
+            if (array_key_exists($propertyName, get_object_vars($this))) {
+                $this->{$propertyName} = $value;
             }
         }
 
