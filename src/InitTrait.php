@@ -22,7 +22,7 @@ trait InitTrait
      */
     public static function initStatic(array $settings): array
     {
-        $settings += (array) static::$settings ?? [];
+        $settings += static::$settings ?? [];
         foreach ($settings as $name => &$value) {
             $propertyName = null;
             if (property_exists(static::class, $name)) {
@@ -61,7 +61,7 @@ trait InitTrait
      */
     protected function initObject(array $settings): array
     {
-        $settings += (array) static::$settings ?? [];
+        $settings += static::$settings ?? [];
         foreach ($settings as $name => &$value) {
             $propertyName = null;
             if (property_exists($this, $name)) {
