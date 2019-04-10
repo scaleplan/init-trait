@@ -30,7 +30,7 @@ trait InitTrait
                 unset($settings[$name]);
             }
 
-            if ($propertyName !== null
+            if ($propertyName === null
                 && property_exists(static::class, NameConverter::snakeCaseToCamelCase($name))) {
                 $propertyName = NameConverter::snakeCaseToCamelCase($name);
                 unset($settings[$name]);
@@ -73,6 +73,10 @@ trait InitTrait
                 && property_exists($this, NameConverter::snakeCaseToLowerCamelCase($name))) {
                 $propertyName = NameConverter::snakeCaseToLowerCamelCase($name);
                 unset($settings[$name]);
+            }
+
+            if (!$propertyName) {
+                continue;
             }
 
             $methodName = 'set' . ucfirst($propertyName);
