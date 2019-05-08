@@ -104,4 +104,13 @@ trait InitTrait
     {
         static::$settings = $settings;
     }
+
+    /**
+     * @param string $name
+     * @param $value
+     */
+    public static function setSetting(string $name, $value) : void
+    {
+        static::$settings[$name] = $value;
+    }
 }
