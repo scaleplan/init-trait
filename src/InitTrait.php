@@ -42,7 +42,7 @@ trait InitTrait
                 continue;
             }
 
-            if (array_key_exists($propertyName, get_class_vars(static::class))) {
+            if (property_exists(self::class, $propertyName)) {
                 static::${$propertyName} = $value;
             }
         }
@@ -85,7 +85,7 @@ trait InitTrait
                 continue;
             }
 
-            if (array_key_exists($propertyName, get_object_vars($this))) {
+            if (property_exists($this, $propertyName)) {
                 $this->{$propertyName} = $value;
             }
         }
