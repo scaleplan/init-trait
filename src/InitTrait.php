@@ -69,7 +69,7 @@ trait InitTrait
                 unset($settings[$name]);
             }
 
-            if ($propertyName !== null
+            if ($propertyName === null
                 && property_exists($this, NameConverter::snakeCaseToLowerCamelCase($name))) {
                 $propertyName = NameConverter::snakeCaseToLowerCamelCase($name);
                 unset($settings[$name]);
